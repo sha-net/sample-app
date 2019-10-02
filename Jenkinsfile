@@ -1,7 +1,21 @@
-podTemplate {
-    node(POD_LABEL) {
-        stage('Run shell') {
-            sh 'echo hello world'
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
         }
     }
 }
