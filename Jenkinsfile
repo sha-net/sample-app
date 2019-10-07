@@ -7,6 +7,11 @@ pipeline {
     }
 
     stages {
+        stage('script') {
+            steps {
+              sh 'ls'
+            }
+        }
         stage('Build Image') {
             steps {
 		script {
