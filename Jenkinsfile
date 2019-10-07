@@ -1,11 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+      registry = "shavitnetzer/sample-app
+      registryCredential = 'dockerhub'
+    }
+
     stages {
-        stage('Build') {
+        stage('Build Image') {
             steps {
-                echo 'Building..'
-		sh 'ls'
+		script {
+		   docker.build registry + ":$BUILD_NUMBER"
+		}
             }
         }
         stage('Test') {
