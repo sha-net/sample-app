@@ -14,10 +14,8 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-		script {
-		   docker build -t registry + ":$BUILD_NUMBER" .
-                   docker push registry + ":$BUILD_NUMBER"
-		}
+	       sh 'docker build -t registry + ":$BUILD_NUMBER" .'
+               sh 'docker push registry + ":${env.BUILD_NUMBER}"'
             }
         }
         stage('Test') {
