@@ -15,7 +15,7 @@ pipeline {
         stage('Build Image') {
             steps {
                sh ' docker'
-	       sh 'docker build -t ${registry} .'
+	       sh 'docker build . -t ${registry}'
                sh 'docker push ${registry}'
             }
         }
