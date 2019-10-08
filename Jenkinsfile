@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-      registry = "shavitnetzer/sample-app"
+      registry = "shavitnetzer/sample-app:${env.BUILD_NUMBER}"
       registryCredential = 'dockerhub'
     }
 
@@ -14,8 +14,10 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-	       sh 'docker build -t ${registry}":"${env.BUILD_NUMBER} .'
-               sh 'docker push ${registry}":"${env.BUILD_NUMBER}'
+               sh 'echo docker build -t ${registry} .'
+	       sh 'docker build -t ${registry} .'
+               sh 'echo docker push ${registry}'
+               sh 'docker push ${registry}'
             }
         }
         stage('Test') {
