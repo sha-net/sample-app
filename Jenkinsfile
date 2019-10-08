@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('script') {
             steps {
-              sh 'ls && sudo service docker start'
+              sh 'ls && docker'
             }
         }
         stage('Build Image') {
