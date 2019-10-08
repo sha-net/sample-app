@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-	       sh 'docker build -t ${registry}":"${env.BUILD_NUMBER} .'
-               sh 'docker push ${registry} + ":${env.BUILD_NUMBER}"'
+	       sh 'docker build -t ${registry}:${env.BUILD_NUMBER} .'
+               sh 'docker push ${registry}:${env.BUILD_NUMBER}"'
             }
         }
         stage('Test') {
