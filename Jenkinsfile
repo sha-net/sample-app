@@ -9,21 +9,23 @@ pipeline {
     stages {
         stage('script') {
             steps {
-              sh 'echo ${registryCredential} >> /tmp/test.txt'
-              sh 'sleep 90000'
+              //sh 'echo ${registryCredential} >> /tmp/test.txt'
+              //sh 'sleep 90000'
               sh 'ls'
             }
         }
         stage('Build Image') {
             steps {
-	       sh 'docker build . -t ${registry}'
+	       script {
+                 dockerImage = docker.build registry + ":$BUILD_NUMBER"
+               }
             }
         }
         stage('push image') {
             steps {
               script {
                 docker.withRegistry( '', registryCredential ) {
-                  ${registry}.push()
+                  dockerImage.push()
                 }
               }
             }
