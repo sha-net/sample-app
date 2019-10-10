@@ -25,10 +25,8 @@ pipeline {
         } //stage('push image')
         stage('create pod yaml') {
             steps {
-               script {
-                  chmod +x create_pod.sh
-		  ./create_pod.sh ${registry}
-		}
+                  sh 'chmod +x create_pod.sh'
+		  sh './create_pod.sh ${registry}'
             }
         } //stage('create pod yaml')
         stage('run pod') {
