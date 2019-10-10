@@ -15,13 +15,16 @@ pipeline {
         stage('Build Image') {
             steps {
 	       sh 'sudo docker build . -t ${registry}'
-               sh 'sudo docker push ${registry}'
+               dockerImage = ${registry}
             }
         }
-        stage('Test') {
+        stage('push image') {
             steps {
-                echo 'Testing..'
-		sh 'docker'
+              script {
+                docker.withRegistry( '', registryCredential ) {
+                  dockerImage.push()
+                }
+              }
             }
         }
         stage('Deploy') {
