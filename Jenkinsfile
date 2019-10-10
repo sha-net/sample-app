@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('script') {
             steps {
+              sh 'sleep 90000'
               sh 'ls'
             }
         }
