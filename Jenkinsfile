@@ -9,9 +9,9 @@ pipeline {
     stages {
         stage('Build Image') {
             steps {
-	       script {
-                 dockerImage = docker.build registry
-               }
+	            script {
+                    dockerImage = docker.build registry
+                }
             }
         } //stage('Build Image')
         stage('push image') {
@@ -26,28 +26,28 @@ pipeline {
         stage('create pod yaml') {
             steps {
                script {
-		  cat <<EOF>> pos-svc.yaml
-			{
-			    "apiVersion": "v1",
-			    "kind": "Pod",
-			    "metadata": {
-				"name": "sample-app"
-			    },
-			    "spec": {
-				"containers": [
-				    {
-					"name": "sample-app",
-					"image": "${registry}",
-					"ports": [
-					    {
-						"containerPort": 8000
-					    }
-					]
-				    }
-				]
-			    }
-			}
-		   EOF
+cat <<EOF>> pos-svc.yaml
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+    "name": "sample-app"
+    },
+    "spec": {
+    "containers": [
+        {
+        "name": "sample-app",
+        "image": "${registry}",
+        "ports": [
+            {
+                "containerPort": 8000
+            }
+        ]
+        }
+    ]
+    }
+}
+EOF
 		}
             }
         } //stage('create pod yaml')
