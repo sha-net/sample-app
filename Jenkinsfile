@@ -31,10 +31,8 @@ pipeline {
         } //stage('create pod yaml')
         stage('run pod') {
             steps {
-               script {
-                 TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`
-                 curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/shavitns/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@pod-svc.yaml
-               }
+                 sh 'TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`'
+                 sh 'curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/shavitns/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@pod-svc.yaml'
             }
         }
     }
