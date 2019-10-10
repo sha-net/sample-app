@@ -14,9 +14,8 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-               sh ' sleep 90000'
-	       sh 'docker build . -t ${registry}'
-               sh 'docker push ${registry}'
+	       sh 'sudo docker build . -t ${registry}'
+               sh 'sudo docker push ${registry}'
             }
         }
         stage('Test') {
