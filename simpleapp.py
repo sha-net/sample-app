@@ -1,4 +1,4 @@
-    #!flask/bin/python
+#!flask/bin/python
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -23,4 +23,4 @@ def get_tasks():
     return jsonify({'tasks': tasks})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(args.port), debug=False)
+    app.run(host='0.0.0.0', port=int(8000), debug=False)
