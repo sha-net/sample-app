@@ -9,17 +9,46 @@ TEMPLATE_APP_PORT="$3"
 TEMPLATE_IMAGE="$4"
 YAML_FILE="pod-svc.yaml"
 TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`
+NAMESPACE="jenkins"
+LB="$TEMPLATE_APP_NAME_lb"
+cat <<EOF>> $YAML_FILE
+apiVersion: v1
+kind: Service
+metadata:
+  name: $LB
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: $TEMPLATE_APP_PORT
+---
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+    "name": "$TEMPLATE_APP_NAME"
+    },
+    "spec": {
+    "containers": [
+        {
+        "name": "$TEMPLATE_APP_NAME",
+        "image": "$TEMPLATE_IMAGE",
+        "ports": [
+            {
+                "containerPort": $TEMPLATE_APP_PORT
+            }
+        ]
+        }
+    ]
+    }
+EOF
 case "$1" in
         start)
-            sed -i "s/TEMPLATE-APP-NAME/$TEMPLATE_APP_NAME/g" $YAML_FILE
-            sed -i "s/TEMPLATE-APP-PORT/$TEMPLATE_APP_PORT/g" $YAML_FILE
-            sed -i "s/TEMPLATE-IMAGE/shavitnetzer\/sample-app:78/g" $YAML_FILE
-            #sed -i "s/TEMPLATE-IMAGE/$TEMPLATE_IMAGE/g" $YAML_FILE
-            curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/jenkins/pods --header \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\" -d@$YAML_FILE
+            curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@$YAML_FILE
             ;;
          
         stop)
-            curl -q -k -X GET https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/jenkins/pods/$TEMPLATE_APP_NAME --header \"Authorization: Bearer $TOKEN\"
+            curl -q -k -X GET https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods/$TEMPLATE_APP_NAME --header "Authorization: Bearer $TOKEN"
             ;;
          
         *)
