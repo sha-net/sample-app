@@ -32,7 +32,7 @@ pipeline {
         stage('run pod') {
             steps {
                  //sh 'TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`'
-                 //sh 'echo curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/jenkins/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@pod-svc.yaml >> /tmp/test.txt'
+                 sh 'curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/jenkins/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@pod-svc.yaml'
                  sh 'sleep 360'
 		 sh './template-script.sh stop'
                  //sh 'PODIP=`curl -q -k -X GET https://10.22.0.1:443/api/v1/namespaces/jenkins/pods/sample-app --header "Authorization: Bearer $TOKEN"  | grep podIP |cut -d'"' -f4`'
