@@ -1,27 +1,27 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sample-app-lb
+  name: TEMPLATE-APP-NAME-lb
 spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8000
+    targetPort: TEMPLATE-APP-PORT
 ---
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-    "name": "sample-app"
+    "name": "TEMPLATE-APP-NAME"
     },
     "spec": {
     "containers": [
         {
-        "name": "sample-app",
-        "image": "shavitnetzer/sample-app:80",
+        "name": "TEMPLATE-APP-NAME",
+        "image": "TEMPLATE-IMAGE",
         "ports": [
             {
-                "containerPort": 8000
+                "containerPort": TEMPLATE-APP-PORT
             }
         ]
         }
