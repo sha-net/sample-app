@@ -9,7 +9,7 @@ TEMPLATE_APP_PORT="$3"
 TEMPLATE_IMAGE="$4"
 YAML_FILE="pod-svc.yaml"
 TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`
-export TOKEN=$TOKEN
+`export TOKEN=$TOKEN`
 NAMESPACE="jenkins"
 LB="$TEMPLATE_APP_NAME_lb"
 cat <<EOF>> $YAML_FILE
