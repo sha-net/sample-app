@@ -31,7 +31,7 @@ pipeline {
         } //stage('create pod yaml')
         stage('run pod') {
             steps {
-                 sh 'TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`'
+                 //sh 'TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`'
                  sh 'curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/jenkins/pods --header "Authorization: Bearer `cat /var/run/secrets/kubernetes.io/serviceaccount/token`" -H "Content-Type: application/json" -d@pod-svc.yaml'
                  sh 'sleep 360'
 		 sh './template-script.sh stop'

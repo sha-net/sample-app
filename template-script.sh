@@ -32,20 +32,20 @@ cat <<EOF>> $YAML_FILE
     ]
     }
 EOF
-case "$1" in
-        start)
-            echo curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@$YAML_FILE >> log.txt
-            #curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@$YAML_FILE
-            ;;
-         
-        stop)
-            echo curl -q -k -X GET https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods/$TEMPLATE_APP_NAME --header "Authorization: Bearer $TOKEN" >> log.txt
-            #curl -q -k -X GET https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods/$TEMPLATE_APP_NAME --header "Authorization: Bearer $TOKEN"
-            ;;
-         
-        *)
-            echo $"Usage: $0 {start|stop}"
-            exit 1
- 
-esac
 fi
+#case "$1" in
+#        start)
+#            echo curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@$YAML_FILE >> log.txt
+#            #curl -q -k -X POST https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods --header "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d@$YAML_FILE
+#            ;;
+#         
+#        stop)
+#            echo curl -q -k -X GET https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods/$TEMPLATE_APP_NAME --header "Authorization: Bearer $TOKEN" >> log.txt
+#            #curl -q -k -X GET https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$NAMESPACE/pods/$TEMPLATE_APP_NAME --header "Authorization: Bearer $TOKEN"
+##            ;;
+#         
+#        *)
+##            echo $"Usage: $0 {start|stop}"
+#            exit 1
+# 
+#esac
