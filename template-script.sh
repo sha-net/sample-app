@@ -12,17 +12,6 @@ TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`
 NAMESPACE="jenkins"
 LB="$TEMPLATE_APP_NAME_lb"
 cat <<EOF>> $YAML_FILE
-apiVersion: v1
-kind: Service
-metadata:
-  name: $LB
-spec:
-  type: LoadBalancer
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: $TEMPLATE_APP_PORT
----
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
