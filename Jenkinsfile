@@ -26,7 +26,7 @@ pipeline {
         stage('create pod') {
             steps {
                   sh 'chmod +x template-script.sh'
-		  sh './template-script.sh start sample-app 8000 ${registry}'
+		  sh './template-script.sh sample-app 8000 ${registry}'
             }
         } //stage('create pod yaml')
         stage('run pod') {
