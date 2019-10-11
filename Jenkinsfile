@@ -37,7 +37,7 @@ pipeline {
         }
         stage('stop pod') {
             steps {
-                 sh 'curl -q -k -X DELETE https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/jenkins/pods/sample-app --header "Authorization: Bearer `cat /var/run/secrets/kubernetes.io/serviceaccount/token`"
+                 sh 'curl -q -k -X DELETE https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/jenkins/pods/sample-app --header "Authorization: Bearer `cat /var/run/secrets/kubernetes.io/serviceaccount/token`"'
             }
         }
     }
