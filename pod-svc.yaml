@@ -1,41 +1,30 @@
-#!/bin/bash
-if [ $# -eq 0 ]
-  then
-    echo "No arguments supplied"
-    exit 0
-else
-registry=$1
-cat <<EOF>> pod-svc.yaml
-{
 apiVersion: v1
 kind: Service
 metadata:
-  name: sample-app-lb
+  name: TEMPLATE-APP-NAME-lb
 spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8000
+    targetPort: TEMPLATE-APP-PORT
 ---
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-    "name": "sample-app"
+    "name": "TEMPLATE-APP-NAME"
     },
     "spec": {
     "containers": [
         {
-        "name": "sample-app",
-        "image": "${registry}",
+        "name": "TEMPLATE-APP-NAME",
+        "image": "TEMPLATE-IMAGE",
         "ports": [
             {
-                "containerPort": 8000
+                "containerPort": TEMPLATE-APP-PORT
             }
         ]
         }
     ]
     }
 }
-EOF
-fi
