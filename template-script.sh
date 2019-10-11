@@ -13,6 +13,7 @@ TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`
 NAMESPACE="jenkins"
 LB="$TEMPLATE_APP_NAME_lb"
 cat <<EOF>> $YAML_FILE
+{
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
@@ -31,6 +32,7 @@ cat <<EOF>> $YAML_FILE
         }
     ]
     }
+}
 EOF
 fi
 #case "$1" in
