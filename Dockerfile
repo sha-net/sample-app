@@ -1,13 +1,10 @@
-FROM alpine:3.1
-
-# Update
-RUN apk add --update python py-pip
-
-# Install app dependencies
-RUN pip install Flask
-
-# Bundle app source
-COPY simpleapp.py /src/simpleapp.py
-
-EXPOSE  8000
-CMD ["python", "/src/simpleapp.py", "-p 8000"]
+FROM python:3.7-alpine
+WORKDIR /code
+ENV FLASK_APP app.py
+ENV FLASK_RUN_HOST 0.0.0.0
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
+COPY * /code/
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["flask", "run"]

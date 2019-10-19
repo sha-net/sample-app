@@ -18,7 +18,7 @@ tasks = [
     },
     {
         'id': 3,
-        'title': Shavit Netzer Python',
+        'title': 'Shavit Netzer Python',
         'description': u'test to find a good Python tutorial on the web', 
         'done': False
     }
